@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "conversations",
+  "info": {
+    "singularName": "conversation",
+    "pluralName": "conversations",
+    "displayName": "conversation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "topic": {
+      "type": "string"
+    },
+    "agent_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::agent-user.agent-user",
+      "inversedBy": "conversations"
+    },
+    "messages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::message.message"
+    }
+  }
+}

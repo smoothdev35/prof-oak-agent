@@ -1,0 +1,53 @@
+rules:
+  commit-and-push:
+    description: "Add modified files, commit with conventional commits standard, and push to active branch"
+    steps:
+      - name: "Add modified files"
+        run: "git add -u"
+        
+      - name: "Get commit type and description"
+        run: |
+          echo "Enter commit type (feat, fix, docs, style, refactor, test, chore):"
+          read COMMIT_TYPE
+          echo "Enter brief description:"
+          read COMMIT_DESC
+          echo "Enter detailed description of changes and intended results:"
+          read COMMIT_BODY
+          export COMMIT_TYPE COMMIT_DESC COMMIT_BODY
+        
+      - name: "Commit changes"
+        run: |
+          git commit -m "${COMMIT_TYPE}: ${COMMIT_DESC}" -m "${COMMIT_BODY}"
+          
+      - name: "Push to active branch"
+        run: "git push origin HEAD"
+
+  github-operations:
+    description: "Efficient GitHub API operation guidelines"
+    workflows:
+      list-repositories:
+        description: "List all repositories for the authenticated user"
+        steps:
+          - name: "Get user info"
+            tool: "get_me"
+            reason: "Get username for repository search"
+          - name: "Search repositories"
+            tool: "search_repositories" 
+            query: "owner:{username}"
+            note: "Use 'owner:username' syntax, not 'user:username'"
+      
+      repository-info:
+        description: "Get repository information efficiently"
+        steps:
+          - name: "Direct repository access"
+            tool: "get_repository" 
+            note: "Use direct repository access when owner/repo known"
+          - name: "Search only when needed"
+            tool: "search_repositories"
+            note: "Only use search when repository name/owner unknown"
+    
+    optimization-rules:
+      - "Always use correct GitHub search syntax: 'owner:username' not 'user:username'"
+      - "Avoid trial-and-error with API calls - know the correct syntax upfront"
+      - "Minimize API calls by using direct access when possible"
+      - "When searching repositories, use specific owner: prefix for user repos"

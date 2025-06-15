@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "messages",
+  "info": {
+    "singularName": "message",
+    "pluralName": "messages",
+    "displayName": "message",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "sender": {
+      "type": "enumeration",
+      "enum": [
+        "user",
+        "agent"
+      ],
+      "required": true
+    },
+    "agent_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::agent-user.agent-user",
+      "inversedBy": "messages"
+    }
+  }
+}
