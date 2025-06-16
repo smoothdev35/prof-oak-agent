@@ -51,3 +51,43 @@ rules:
       - "Avoid trial-and-error with API calls - know the correct syntax upfront"
       - "Minimize API calls by using direct access when possible"
       - "When searching repositories, use specific owner: prefix for user repos"
+
+  documentation:
+    description: "Documentation management and code generation guidelines"
+    storage:
+      location: "root doc folder"
+      format: "markdown documents"
+      types:
+        - "user stories"
+        - "code generation instructions" 
+        - "mermaid diagram instructions"
+    
+    code-generation-workflow:
+      description: "Guidelines for feature implementation requests"
+      base-principle: "Base implementation on existing guidelines in documentation"
+      
+      implementation-rules:
+        - name: "Incremental completion"
+          rule: "If some implementation is already in place, complete only what's missing"
+          
+        - name: "Gap identification and resolution"
+          rule: "If obvious missing steps or important considerations are identified, mention them and propose relevant fixes and/or additions"
+          action: "Complete the relevant documentation files accordingly (user stories, code generation specs, mermaid diagram syntax markdown document)"
+      
+      process:
+        - name: "Review existing documentation"
+          action: "Check user stories, code generation specs, and mermaid diagrams in doc folder"
+          
+        - name: "Assess current implementation"
+          action: "Identify what parts are already implemented vs what's missing"
+          
+        - name: "Generate missing code"
+          action: "Implement only the missing portions based on documentation guidelines"
+          
+        - name: "Update documentation"
+          action: "If gaps or improvements identified, update relevant markdown files"
+          files:
+            - "user stories documentation"
+            - "code generation specifications" 
+            - "mermaid diagram syntax documentation"
+
